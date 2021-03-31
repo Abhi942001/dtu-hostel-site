@@ -12,23 +12,24 @@
 </template>
 
 <script>
-import { userBus } from "@/main.js";
+
 
 export default {
 	name: "HelloWorld",
 	data() {
 		return {
-			username: "",
+			username: this.$store.state.user.username,
 		};
 	},
 
-	created() {
-		this.username = this.$store.getters.getUser;
+	
 
-		userBus.$on("userLogout", () => {
-			this.username = "none";
-		});
-	},
+	watch: {
+		'$store.state.user':function (){
+			this.username=this.$store.state.user.username;
+		}
+
+		},
 };
 </script>
 
