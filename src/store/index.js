@@ -8,8 +8,8 @@ const serverPort = 8081;
 export default new Vuex.Store({
 	state: {
 		user: {
-			username: "",
-			userType: "",
+			username: null,
+			userType: null,
 			hasRequestedAllotment: false,
 		},
 	},
