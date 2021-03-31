@@ -33,7 +33,7 @@
 					<v-card class="noticeCard mx-auto " outlined>
 						<h3>Notices</h3>
 						<p>
-							Abhishek ipsum dolor sit amet, consectetur adipiscing
+							Lorem ipsum dolor sit amet, consectetur adipiscing
 							elit, sed do eiusmod tempor incididunt ut labore et
 							dolore magna aliqua. Ut enim ad minim veniam, quis
 							nostrud exercitation ullamco laboris nisi ut aliquip
