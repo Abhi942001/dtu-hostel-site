@@ -12,8 +12,6 @@
 </template>
 
 <script>
-
-
 export default {
 	name: "HelloWorld",
 	data() {
@@ -22,14 +20,11 @@ export default {
 		};
 	},
 
-	
-
 	watch: {
-		'$store.state.user':function (){
-			this.username=this.$store.state.user.username;
-		}
-
+		"$store.state.user": function() {
+			this.username = this.$store.state.user.username;
 		},
+	},
 };
 </script>
 
