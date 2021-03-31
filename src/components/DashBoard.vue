@@ -15,15 +15,15 @@
 									style="height:300px;"
 								/>>
 								<!-- <v-img
-						src="./public/hostelImages/" + {images[i]}
-					/>height="100%"> -->
+						src="./public/hostelImages/img1.jpg" style="height:300px;"
+					/>> -->
 								<v-row
 									class="fill-height"
 									align="center"
 									justify="center"
 								>
 									<div class="display-3">
-										{{ slide }} Slide
+										{{ slide }} Slide 
 									</div>
 								</v-row>
 							</v-carousel-item>
@@ -32,8 +32,17 @@
 				</v-col>
 				<v-col>
 					<v-card class="noticeCard mx-auto " outlined>
-						<h3>Notices</h3>
-						<p>
+						<h3 class="noticeHeading">Notices</h3>
+						<v-list rounded>
+							<v-list-item-group v-model="selectedItem" color="primary" >
+							<v-list-item v-for="(notice, i) in notices" :key="i" >
+							<v-list-item-content>
+                            <v-list-item-title v-text="(i+1)+'. ' + notice" class="noticesText"/>
+                             </v-list-item-content>
+							 </v-list-item>
+							 </v-list-item-group>
+							 </v-list>
+						<!-- <p>
 							Lorem ipsum dolor sit amet, consectetur adipiscing
 							elit, sed do eiusmod tempor incididunt ut labore et
 							dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -43,7 +52,7 @@
 							eu fugiat nulla pariatur. Excepteur sint occaecat
 							cupidatat non proident, sunt in culpa qui officia
 							deserunt mollit anim id est laborum.
-						</p>
+						</p> -->
 					</v-card>
 				</v-col>
 			</v-row>
@@ -56,7 +65,10 @@ export default {
 	name: "DashBoard",
 	data() {
 		return {
-			imagesHostel: ["img1", "img2", "img3", "img4", "img5"],
+			selectedItem: 1,
+			notices: ["Notice1","Notice2","Notice3"],
+			hostelImageLocation:"./public/hostelImages/",
+			hostelImage: ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"],
 			slides: ["First", "Second", "Third", "Fourth", "Fifth"],
 		};
 	},
@@ -68,7 +80,7 @@ export default {
 	height: 100%;
 	width: 100%;
 	margin: 0px;
-	padding: 10px 10px;
+	/* padding: 10px 10px; */
 	box-sizing: border-box;
 }
 
@@ -76,8 +88,17 @@ export default {
 	margin: 0px;
 	width: 100%;
 	padding: 20px;
+	text-align: left;
 }
 .mainContainer {
 	max-height: 30px;
+}
+.noticeHeading{
+	border-bottom: 1px solid black;
+	
+	padding-left: 20px;
+}
+.noticesText{
+	padding-left:0;
 }
 </style>
