@@ -33,6 +33,10 @@
 				</v-form>
 			</v-card>
 		</v-container>
+
+		<v-snackbar v-model="showSnackbar" :timeout="snackbarTimeout"
+			>{{ snackbarMessage }}
+		</v-snackbar>
 	</v-app>
 </template>
 
@@ -46,6 +50,11 @@ export default {
 			isLoading: false,
 			username: "",
 			password: "",
+
+			//toast
+			showSnackbar: false,
+			snackbarTimeout: 2000,
+			snackbarMessage: "",
 		};
 	},
 
@@ -57,13 +66,16 @@ export default {
 				utype: this.person,
 				upass: this.password,
 			};
+
 			await this.$store
 				.dispatch("loginUser", payload)
 				.then(() => {
 					this.$router.push("/");
 				})
-				.catch(() => {
+				.catch((err) => {
 					this.isLoading = false;
+					this.snackbarMessage = err;
+					this.showSnackbar = true;
 				});
 		},
 	},
