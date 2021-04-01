@@ -4,9 +4,12 @@
 
 		<!-- login link conditonal -->
 		<router-link v-if="!isLoggedIn" to="/login" exact>Login</router-link>
-		<a href="#" v-else label="Logout" color="success" @click="logout()"
-			>Logout {{ $store.state.user.username }}</a
-		>
+		<span v-else>
+			<a href="#" label="Logout" color="success" @click="logout()"
+				>Logout</a
+			>
+			{{ $store.state.user.username | capitalize }}
+		</span>
 	</div>
 </template>
 
@@ -42,6 +45,13 @@ export default {
 			}
 		},
 	},
+	filters: {
+		capitalize: function(value) {
+			if (!value) return "";
+
+			return value.charAt(0).toUpperCase() + value.slice(1);
+		},
+	},
 
 	created() {
 		// userBus.$on("userLogin", (newUser) => {
@@ -67,6 +77,11 @@ export default {
 	}
 
 	& a.router-link-exact-active {
+		background-color: #42b983;
+		color: white;
+	}
+
+	& a:hover {
 		background-color: #42b983;
 		color: white;
 	}
