@@ -12,6 +12,8 @@ export default new Vuex.Store({
 			userType: null,
 			hasRequestedAllotment: false,
 		},
+
+		admin: null,
 	},
 	getters: {
 		getUser(state) {
@@ -42,6 +44,19 @@ export default new Vuex.Store({
 			const tempState = state;
 			tempState.user.hasRequestedAllotment = true;
 			state = tempState;
+		},
+
+		adminDataSet(state, data) {
+			const correctedData = data.map((element) => {
+				element.back === 1
+					? (element.back = "Yes")
+					: (element.back = "No");
+				return element;
+			});
+
+			state.admin = {
+				data: correctedData,
+			};
 		},
 	},
 	actions: {
@@ -78,6 +93,23 @@ export default new Vuex.Store({
 					state.commit("allotmentRequested");
 				});
 		},
+		async getStudents(state) {
+			await axios
+				.get(
+					`http://localhost:${serverPort}/server/admin/hostel/unalloted`,
+					{
+						params: {
+							user: state.state.user,
+						},
+					}
+				)
+				.then((res) => {
+					if (!res) throw new Error("No data Received");
+
+					state.commit("adminDataSet", res.data);
+				});
+		},
 	},
+
 	modules: {},
 });

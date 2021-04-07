@@ -46,13 +46,29 @@ app.post("/server/login", async (req, res) => {
 app.post("/server/form/submit", async (req, res) => {
 	const { user, formData } = req.body.data;
 
-	const result = await genQuery({
+	const result = await query({
 		table: "hostel_form",
 		values: `"${user}","${formData.name}","${formData.rollno}", "${formData.al1}", "${formData.al2}", "${formData.city}", "${formData.pincode}", 0, "${formData.email}", "${formData.mobile}"`,
 		type: QUERY_TYPES.SET,
 	});
 
 	res.send(result);
+});
+
+app.get("/server/admin/hostel/unalloted", async (req, res) => {
+	const data = JSON.parse(req.query.user);
+	if (data.userType !== "admin") {
+		res.send(null);
+	} else {
+		const result = await query({
+			type: QUERY_TYPES.SELECT,
+			table: "hostel_form, hostel_status",
+			where:
+				"hostel_form.username = hostel_status.username and is_alloted = 0",
+		});
+
+		res.send(result);
+	}
 });
 
 app.listen(port, () => {
