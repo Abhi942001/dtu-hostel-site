@@ -20,7 +20,7 @@ export default {
 	name: "Nav",
 	data() {
 		return {
-			uname: "null",
+			uname: this.$store.state.user.username,
 			isLoggedIn: false,
 		};
 	},
@@ -29,7 +29,7 @@ export default {
 			this.$store.commit("logout");
 			this.isLoggedIn = false;
 			alert("Logged out!");
-			this.$router.push("login");
+			this.$router.push("/login");
 			// userBus.$emit("userLogout");
 		},
 	},
@@ -54,10 +54,7 @@ export default {
 	},
 
 	created() {
-		// userBus.$on("userLogin", (newUser) => {
-		// 	this.uname = newUser;
-		// 	this.isLoggedIn = true;
-		// });
+		this.uname ? (this.isLoggedIn = true) : (this.isLoggedIn = false);
 	},
 };
 </script>
