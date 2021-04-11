@@ -25,6 +25,7 @@ const query = async ({ table, where, values, type, select = "*" }) => {
 			default:
 				break;
 		}
+		console.log(query);
 		connection.query(query, (err, result) => {
 			if (err) rej(err);
 			res(result);

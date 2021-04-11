@@ -61,7 +61,7 @@ export default {
 
 <style lang="scss">
 #nav {
-	padding: 30px;
+	padding: 20px 30px 10px 30px;
 
 	& a {
 		display: inline block;
@@ -82,5 +82,9 @@ export default {
 		background-color: #42b983;
 		color: white;
 	}
+}
+.navbarLogo {
+	height: 100%;
+	width: 100%;
 }
 </style>
