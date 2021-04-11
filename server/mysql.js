@@ -16,11 +16,15 @@ const query = async ({ table, where, values, type, select = "*" }) => {
 				query = `select ${select} from ${table} ${
 					where ? `where ${where}` : ""
 				}`;
+				console.log(query);
 				break;
 			case QUERY_TYPES.SET:
 				query = `insert into ${table} values (${values})`;
 				break;
 			case QUERY_TYPES.DELETE:
+				break;
+			case QUERY_TYPES.UPDATE:
+				query = `update ${table} set ${values} where ${where}`;
 				break;
 			default:
 				break;

@@ -39,8 +39,6 @@ app.post("/server/login", async (req, res) => {
 	} else {
 		res.send(null);
 	}
-
-	// res.send(authenticatedUser.length > 0 ? uname : null);
 });
 
 app.post("/server/form/submit", async (req, res) => {
@@ -69,6 +67,37 @@ app.get("/server/admin/hostel/unalloted", async (req, res) => {
 
 		res.send(result);
 	}
+});
+
+app.get("/server/admin/hostels", async (req, res) => {
+	await query({
+		type: QUERY_TYPES.SELECT,
+		table: "hostel_occupancy",
+	})
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((e) => {
+			res.send(e.sqlMessage);
+		});
+});
+
+app.post("/server/admin/hostel", async (req, res) => {
+	const { room_id, occupant1, occupant2 } = req.body.data;
+	await query({
+		type: QUERY_TYPES.UPDATE,
+		values: `occupant1 = "${occupant1}" ${
+			occupant2 ? `, occupant2 = "${occupant2}"` : ""
+		}`,
+		table: `hostel_occupancy`,
+		where: `room_id = ${room_id}`,
+	})
+		.then((result) => {
+			res.send("ok");
+		})
+		.catch((e) => {
+			res.send(e.sqlMessage);
+		});
 });
 
 app.listen(port, () => {
