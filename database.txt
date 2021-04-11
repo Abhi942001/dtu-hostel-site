@@ -1,0 +1,10 @@
+CREATE TABLE `hostel_occupancy` (
+  `room_id` int NOT NULL AUTO_INCREMENT,
+  `occupant1` varchar(255) DEFAULT NULL,
+  `occupant2` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`room_id`),
+  KEY `username_idx` (`occupant1`),
+  KEY `occupant2_idx` (`occupant2`),
+  CONSTRAINT `occupant1` FOREIGN KEY (`occupant1`) REFERENCES `student_account` (`username`),
+  CONSTRAINT `occupant2` FOREIGN KEY (`occupant2`) REFERENCES `student_account` (`username`)
+)
