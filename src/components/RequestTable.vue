@@ -10,8 +10,9 @@
       >
         <template slot="item.actions" slot-scope="data">
           <v-btn
+            class="btn1"
             color="success"
-            width="60%"
+            width="100%"
             small
             depressed
             outlined
@@ -19,8 +20,9 @@
             >Allot</v-btn
           >
           <v-btn
+            class="btn2"
             color="red"
-            width="60%"
+            width="100%"
             @click="rejectActions(data.item.username)"
             small
             depressed
@@ -66,7 +68,8 @@ export default {
           value: "city",
         },
         {
-          text: "Year:",
+          text: "Roll No",
+          value: "roll_no",
         },
         {
           text: "Back in Prev year?",
@@ -140,5 +143,13 @@ export default {
 }
 .margin-adj {
   margin: 10px;
+}
+.btn1 {
+  margin-top: 5px;
+  margin-bottom: 1px;
+}
+.btn2 {
+  margin-top: 1px;
+  margin-bottom: 5px;
 }
 </style>

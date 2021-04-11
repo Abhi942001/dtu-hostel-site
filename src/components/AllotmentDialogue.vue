@@ -1,64 +1,60 @@
 <template>
-  <v-app>
-    <v-row justify="center">
-      <v-dialog v-model="dialog" persistent max-width="600px">
-        <v-card style="height: 300px; overflow: auto">
-          <v-select
-            :items="hostelRooms"
-            item-text="room_id"
-            label="Hostel Room"
-            v-model="room_id"
-            dense
-            solo
-            style="margin: 20px 30px 10px"
-            :loading="isSelectBoxLoading"
-          >
-            <template slot="item" slot-scope="data">
-              Room No. {{ data.item.room_id }}
-            </template>
-          </v-select>
-          <v-select
-            :items="occupant1list"
-            item-text="username"
-            v-model="occupant1"
-            label="Occupant 1"
-            :disabled="!room_id || isOccupant1Disabled"
-            dense
-            solo
-            style="margin: 10px 30px 10px"
-            :loading="isSelectBoxLoading"
-          >
-            <template slot="item" slot-scope="data">
-              Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
-            </template>
-            <template slot="selection" slot-scope="data">
-              Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
-            </template>
-          </v-select>
-          <v-select
-            :disabled="!room_id || isOccupant2Disabled"
-            :items="occupant2list"
-            item-text="username"
-            label="Occupant 2"
-            v-model="occupant2"
-            dense
-            solo
-            style="margin: 10px 30px 10px"
-            :loading="isSelectBoxLoading"
-          >
-            <template slot="item" slot-scope="data">
-              Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
-            </template>
-            <template slot="selection" slot-scope="data">
-              Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
-            </template></v-select
-          >
-          <v-btn color="blue" text @click="closedialog"> Close </v-btn>
-          <v-btn color="success" text @click="allotActions()"> Allot </v-btn>
-        </v-card>
-      </v-dialog>
-    </v-row>
-  </v-app>
+  <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-card style="height: 300px; overflow: auto">
+      <v-select
+        :items="hostelRooms"
+        item-text="room_id"
+        label="Hostel Room"
+        v-model="room_id"
+        dense
+        solo
+        style="margin: 20px 30px 10px"
+        :loading="isSelectBoxLoading"
+      >
+        <template slot="item" slot-scope="data">
+          Room No. {{ data.item.room_id }}
+        </template>
+      </v-select>
+      <v-select
+        :items="occupant1list"
+        item-text="username"
+        v-model="occupant1"
+        label="Occupant 1"
+        :disabled="!room_id || isOccupant1Disabled"
+        dense
+        solo
+        style="margin: 10px 30px 10px"
+        :loading="isSelectBoxLoading"
+      >
+        <template slot="item" slot-scope="data">
+          Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
+        </template>
+        <template slot="selection" slot-scope="data">
+          Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
+        </template>
+      </v-select>
+      <v-select
+        :disabled="!room_id || isOccupant2Disabled"
+        :items="occupant2list"
+        item-text="username"
+        label="Occupant 2"
+        v-model="occupant2"
+        dense
+        solo
+        style="margin: 10px 30px 10px"
+        :loading="isSelectBoxLoading"
+      >
+        <template slot="item" slot-scope="data">
+          Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
+        </template>
+        <template slot="selection" slot-scope="data">
+          Name: {{ data.item.name }} Roll No. {{ data.item.roll_no }}
+        </template></v-select
+      >
+      <v-btn color="blue" text @click="closedialog"> Close </v-btn>
+      <v-btn color="success" text @click="allotActions()"> Allot </v-btn>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>

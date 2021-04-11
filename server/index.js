@@ -159,6 +159,18 @@ app.post("/server/admin/reject", async (req, res) => {
 	res.send("ok");
 });
 
+app.post("/server/admin/reconsider", async (req, res) => {
+	const { username } = req.body.data;
+	await query({
+		type: QUERY_TYPES.UPDATE,
+		values: `req_rejected = 0`,
+		table: `hostel_status`,
+		where: `username = "${username}"`,
+	});
+
+	res.send("ok");
+});
+
 app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
 });
