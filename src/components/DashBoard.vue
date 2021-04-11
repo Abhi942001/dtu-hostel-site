@@ -113,7 +113,7 @@ export default {
         "img4.jpg",
         "img5.jpg",
       ],
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"],
+      
     };
   },
   
