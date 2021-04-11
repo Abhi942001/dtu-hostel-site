@@ -1,9 +1,9 @@
 <template>
-	<v-app v-if="checkAdmin">
+	<v-app>
 		<h1>Admin Panel</h1>
 		<v-divider />
 		<span>All hostel requests</span>
-		<v-card class="d-flex justify-center">
+		<v-card class="d-flex justify-center flex-wrap">
 			<div>
 				<div>Pending Requests</div>
 				<RequestTable />
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import store from "../store/index";
 import RequestTable from "@/components/RequestTable.vue";
 import RejectedTable from "@/components/RejectedTable.vue";
 export default {
@@ -25,24 +26,33 @@ export default {
 		return {};
 	},
 
-	created() {
-		if (!this.checkAdmin) {
-			this.$router.push("/");
+	beforeRouteEnter(to, from, next) {
+		const user = JSON.parse(localStorage.getItem("user"));
+		if ((user ? user.utype !== "admin" : true) && to.name === "Admin") {
+			next("/login");
+		} else {
+			next();
 		}
 	},
-	computed: {
-		checkAdmin: function() {
-			return this.$store.state.user.userType === "admin" ? true : false;
-		},
-	},
 
-	watch: {
-		"$store.state.user": function() {
-			if (!this.checkAdmin) {
-				this.$router.push("/");
-			}
-		},
-	},
+	// created() {
+	// 	if (!this.checkAdmin) {
+	// 		this.$router.push("/");
+	// 	}
+	// },
+	// computed: {
+	// 	checkAdmin: function() {
+	// 		return this.$store.state.user.userType === "admin" ? true : false;
+	// 	},
+	// },
+
+	// watch: {
+	// 	"$store.state.user": function() {
+	// 		if (!this.checkAdmin) {
+	// 			this.$router.push("/");
+	// 		}
+	// 	},
+	// },
 };
 </script>
 
