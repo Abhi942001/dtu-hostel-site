@@ -159,7 +159,7 @@ export default {
   max-width: 100%;
 }
 .dtuInfo {
-  padding-top: 50px;
+  margin: 50px 0px;
 }
 .dtuInfoText {
   text-align: left;
