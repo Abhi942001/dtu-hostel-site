@@ -11,7 +11,7 @@ export default {
 	components: { loginCard },
 	name: "login",
 
-	beforeCreate() {
+	mounted() {
 		if (this.$store.state.user.username) {
 			this.$router.push("/");
 		}

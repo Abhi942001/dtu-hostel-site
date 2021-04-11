@@ -6,8 +6,13 @@
 			:items="students"
 			:items-per-page="5"
 			:loading="isTableLoading"
-			class="elevation-1"
-		></v-data-table>
+		>
+			<template slot="item.actions" slot-scope="">
+				<v-btn color="success" small depressed outlined
+					>Reconsider</v-btn
+				>
+			</template>
+		</v-data-table>
 		<v-btn
 			class="margin-adj"
 			@click="fetchRequestActions"
@@ -41,9 +46,15 @@ export default {
 				{
 					text: "Back in Prev year?",
 					value: "back",
-					filter: (value) => {
-						return value === "No" ? true : false;
-					},
+					// filter: (value) => {
+					// 	return value === "No" ? true : false;
+					// },
+				},
+				{
+					text: "Actions",
+					align: "center",
+					value: "actions",
+					sortable: false,
 				},
 			],
 			students: [],

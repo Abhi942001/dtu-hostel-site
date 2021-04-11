@@ -30,7 +30,7 @@ app.post("/server/login", async (req, res) => {
 			where: `username = "${uname}"`,
 			type: QUERY_TYPES.SELECT,
 		});
-		console.log(reqHostel);
+
 		res.send(
 			reqHostel.length > 0
 				? { uname, hostelStatus: reqHostel[0] }
