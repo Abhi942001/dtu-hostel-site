@@ -26,20 +26,29 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
 	name: "HelloWorld",
 	data() {
 		return {
-			username: this.$store.state.user.username,
+			hostelStatus: null,
 			userType: this.$store.state.user.userType,
 		};
 	},
 
 	watch: {
 		"$store.state.user": function() {
-			this.username = this.$store.state.user.username;
 			this.userType = this.$store.state.user.userType;
 		},
+	},
+
+	beforeMount() {
+		const user = JSON.parse(localStorage.getItem("user"));
+		axios
+			.get("http://localhost:8081/server/hostel-status", {
+				params: { username: user ? user.uname : null },
+			})
+			.then((res) => (this.hostelStatus = res.data));
 	},
 };
 </script>

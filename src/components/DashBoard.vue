@@ -74,11 +74,9 @@
                 Block – 2,3,4 Girls Hostel. Each hostel is provided with
                 facilities of : Solar water geysers, T.V. with cable connection,
                 Table Tennis, Carom, Chess, Badminton Court, Gymnasium, Reading
-                Room and LAN.</span>
-              
+                Room and LAN.</span
+              >
             </div>
-            
-            
           </v-card>
         </div>
       </v-row>
@@ -113,10 +111,8 @@ export default {
         "img4.jpg",
         "img5.jpg",
       ],
-      
     };
   },
-  
 };
 </script>
 

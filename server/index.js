@@ -13,22 +13,22 @@ app.post("/server/login", async (req, res) => {
 	const { uname, upass, utype } = req.body.data;
 
 	const authenticatedUser = await query({
+		type: QUERY_TYPES.SELECT,
 		select: "*",
 		table: utype === "student" ? "student_account" : "admin_account",
 		where:
 			utype === "student"
 				? `username = "${uname}" and password = "${upass}"`
 				: `admin_pass = "${upass}"`,
-		type: QUERY_TYPES.SELECT,
 	});
 
 	if (authenticatedUser.length > 0) {
 		// const reqHostel = await hostelStatus(uname);
 		const reqHostel = await query({
+			type: QUERY_TYPES.SELECT,
 			select: "*",
 			table: "hostel_status",
 			where: `username = "${uname}"`,
-			type: QUERY_TYPES.SELECT,
 		});
 
 		res.send(
@@ -40,6 +40,15 @@ app.post("/server/login", async (req, res) => {
 		res.send(null);
 	}
 });
+
+app.get("/server/hostel-status", async (req, res) => {
+	const { username } = req.query;
+	await query({
+		type: QUERY_TYPES.SELECT,
+		table: "hostel_status",
+		where: `username = "${username}"`
+	}).then(result => res.send(result[0])).catch(e => res.send("ERROR"))
+})
 
 app.post("/server/form/submit", async (req, res) => {
 	const { user, formData } = req.body.data;
@@ -62,7 +71,7 @@ app.get("/server/admin/hostel/unalloted", async (req, res) => {
 			type: QUERY_TYPES.SELECT,
 			table: "hostel_form, hostel_status",
 			where:
-				"hostel_form.username = hostel_status.username and is_alloted = 0",
+				"hostel_form.username = hostel_status.username",
 		});
 
 		res.send(result);
@@ -82,22 +91,84 @@ app.get("/server/admin/hostels", async (req, res) => {
 		});
 });
 
-app.post("/server/admin/hostel", async (req, res) => {
-	const { room_id, occupant1, occupant2 } = req.body.data;
+app.get("/server/admin/hostel", async (req, res) => {
+	const { room_id } = req.query;
 	await query({
-		type: QUERY_TYPES.UPDATE,
-		values: `occupant1 = "${occupant1}" ${
-			occupant2 ? `, occupant2 = "${occupant2}"` : ""
-		}`,
-		table: `hostel_occupancy`,
-		where: `room_id = ${room_id}`,
+		type: QUERY_TYPES.SELECT,
+		table: "hostel_occupancy",
+		where: `room_id = ${room_id}`
 	})
 		.then((result) => {
-			res.send("ok");
+			res.send(result);
 		})
 		.catch((e) => {
 			res.send(e.sqlMessage);
 		});
+});
+
+app.get("/server/admin/hostel/students", async (req, res) => {
+	await query({
+		type: QUERY_TYPES.SELECT,
+		table: `student_account`,
+		select: `username`
+	}).then((result) => {
+		const studentUsernames = result.map(e => e.username);
+		res.send(studentUsernames);
+	}).catch((e) => {
+		res.send(e.sqlMessage);
+	});
+});
+
+app.post("/server/admin/hostel", async (req, res) => {
+	const { room_id, occupant1, occupant2 } = req.body.data;
+	await query({
+		type: QUERY_TYPES.UPDATE,
+		values: `occupant1 = "${occupant1}" ${occupant2 ? `, occupant2 = "${occupant2}"` : ""
+			}`,
+		table: `hostel_occupancy`,
+		where: `room_id = ${room_id}`,
+	})
+	await query({
+		type: QUERY_TYPES.UPDATE,
+		values: `is_alloted = 1`,
+		table: `hostel_status`,
+		where: `username = "${occupant1}"`,
+	})
+
+	if (occupant2) {
+		await query({
+			type: QUERY_TYPES.UPDATE,
+			values: `is_alloted = 1`,
+			table: `hostel_status`,
+			where: `username = "${occupant2}"`,
+		})
+	}
+	res.send("ok");
+});
+
+
+app.post("/server/admin/reject", async (req, res) => {
+	const { username } = req.body.data;
+	await query({
+		type: QUERY_TYPES.UPDATE,
+		values: `req_rejected = 1`,
+		table: `hostel_status`,
+		where: `username = "${username}"`,
+	});
+
+	res.send("ok");
+});
+
+app.post("/server/admin/reconsider", async (req, res) => {
+	const { username } = req.body.data;
+	await query({
+		type: QUERY_TYPES.UPDATE,
+		values: `req_rejected = 0`,
+		table: `hostel_status`,
+		where: `username = "${username}"`,
+	});
+
+	res.send("ok");
 });
 
 app.listen(port, () => {

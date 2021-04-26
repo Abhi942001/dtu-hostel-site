@@ -13,10 +13,8 @@ const query = async ({ table, where, values, type, select = "*" }) => {
 	return new Promise((res, rej) => {
 		switch (type) {
 			case QUERY_TYPES.SELECT:
-				query = `select ${select} from ${table} ${
-					where ? `where ${where}` : ""
-				}`;
-				console.log(query);
+				query = `select ${select} from ${table} ${where ? `where ${where}` : ""
+					}`;
 				break;
 			case QUERY_TYPES.SET:
 				query = `insert into ${table} values (${values})`;
