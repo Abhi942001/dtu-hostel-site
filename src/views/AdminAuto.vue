@@ -1,20 +1,26 @@
 <template>
-	<v-app>
-		<v-container
+	<v-container style="width:100%">
+		<HelloWorld style="margin-bottom: 20px;" />
+		<v-card style="padding: 20px;">
+			<div class="text-h2">
+				<b>Auto Allotment</b>
+			</div>
+		</v-card>
+		<v-divider style="margin:20px 0px 20px" />
+		<v-card
 			class="d-flex justify-center table-container"
 			style="width:100%"
 		>
-			<v-card class="d-flex justify-center table-container" outlined>
-				<StudentSelectTable />
-			</v-card>
-		</v-container>
-	</v-app>
+			<StudentSelectTable />
+		</v-card>
+	</v-container>
 </template>
 
 <script>
-import StudentSelectTable from "../components/StudentSelectTable";
+import StudentSelectTable from "@/components/StudentSelectTable";
+import HelloWorld from "@/components/HelloWorld";
 export default {
-	components: { StudentSelectTable },
+	components: { StudentSelectTable, HelloWorld },
 	name: "AdminAuto",
 	data: () => ({}),
 
@@ -31,7 +37,7 @@ export default {
 
 <style>
 .table-container {
-	width: 50%;
+	width: 80%;
 	padding: 20px;
 }
 </style>

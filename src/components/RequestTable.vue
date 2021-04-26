@@ -10,7 +10,7 @@
 			>
 				<template slot="item.actions" slot-scope="data">
 					<div class="d-flex">
-						<v-tooltip bottom>
+						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">
 								<v-btn
 									class="btn1"
@@ -26,7 +26,7 @@
 							</template>
 							<span>Allot hostel to this student</span>
 						</v-tooltip>
-						<v-tooltip bottom>
+						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">
 								<v-btn
 									class="btn2"

@@ -7,7 +7,6 @@
 			:single-select="singleSelect"
 			item-key="name"
 			show-select
-			checkboxColor="red"
 			:loading="isTableLoading"
 		>
 			<template v-slot:top>

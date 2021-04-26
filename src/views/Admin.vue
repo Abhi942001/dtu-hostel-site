@@ -1,5 +1,6 @@
 <template>
 	<v-container>
+		<HelloWorld style="margin-bottom: 20px;" />
 		<v-card style="padding: 20px;">
 			<div class="text-h2">
 				<b>Manual Allotment</b>
@@ -32,8 +33,10 @@
 <script>
 import RequestTable from "@/components/RequestTable.vue";
 import RejectedTable from "@/components/RejectedTable.vue";
+import HelloWorld from "@/components/HelloWorld.vue";
+
 export default {
-	components: { RequestTable, RejectedTable },
+	components: { RequestTable, RejectedTable, HelloWorld },
 	data() {
 		return {};
 	},

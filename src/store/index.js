@@ -71,7 +71,6 @@ export default new Vuex.Store({
 					if (!result) {
 						throw new Error("Invalid Username");
 					} else {
-						console.log(result);
 						state.commit("login", {
 							uname: result.uname,
 							utype: payload.utype,

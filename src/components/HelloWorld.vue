@@ -12,13 +12,21 @@
 
 	<!-- if user is admin -->
 	<div v-else-if="userType === 'admin'">
-		<v-btn style="margin: 0px 10px" outlined @click="$router.push('/admin')"
-			>Manual Hostel Allotment</v-btn
-		>
+		<router-link to="/admin" exact>
+			<v-btn
+				color="primary"
+				style="margin: 0px 10px"
+				outlined
+				:text="!onManual"
+				>Manual Hostel Allotment</v-btn
+			>
+		</router-link>
 
-		<v-btn outlined @click="$router.push('/admin-auto')"
-			>Auto Hostel Allotment</v-btn
-		>
+		<router-link to="/admin-auto" exact>
+			<v-btn color="primary" outlined :text="!onAuto"
+				>Auto Hostel Allotment</v-btn
+			>
+		</router-link>
 	</div>
 
 	<!-- if not logged in -->
@@ -33,12 +41,32 @@ export default {
 		return {
 			hostelStatus: null,
 			userType: this.$store.state.user.userType,
+
+			onManual: false,
+			onAuto: false,
 		};
 	},
 
 	watch: {
 		"$store.state.user": function() {
 			this.userType = this.$store.state.user.userType;
+		},
+
+		$route: {
+			handler: function() {
+				if (this.$router.currentRoute.path === "/admin") {
+					this.onManual = true;
+					this.onAuto = false;
+				} else if (this.$router.currentRoute.path === "/admin-auto") {
+					this.onManual = false;
+					this.onAuto = true;
+				} else {
+					this.onManual = false;
+					this.onAuto = false;
+				}
+			},
+			immediate: true,
+			deep: true,
 		},
 	},
 
@@ -62,10 +90,5 @@ a {
 	color: #2c3e50;
 
 	padding: 3px;
-}
-
-a:hover {
-	background-color: #42b983;
-	color: white;
 }
 </style>
