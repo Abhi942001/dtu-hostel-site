@@ -12,8 +12,13 @@
 
 	<!-- if user is admin -->
 	<div v-else-if="userType === 'admin'">
-		Click <router-link to="admin" exact>here</router-link> to open admin
-		panel.
+		<v-btn style="margin: 0px 10px" outlined @click="$router.push('/admin')"
+			>Manual Hostel Allotment</v-btn
+		>
+
+		<v-btn outlined @click="$router.push('/admin-auto')"
+			>Auto Hostel Allotment</v-btn
+		>
 	</div>
 
 	<!-- if not logged in -->

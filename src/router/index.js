@@ -29,6 +29,11 @@ const routes = [
 		name: "Admin",
 		component: Admin,
 	},
+	{
+		path: "/admin-auto",
+		name: "AdminAuto",
+		component: () => import("../views/AdminAuto"),
+	},
 ];
 
 const router = new VueRouter({
