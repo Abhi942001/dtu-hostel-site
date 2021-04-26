@@ -7,19 +7,26 @@
 			:single-select="singleSelect"
 			item-key="name"
 			show-select
+			checkboxColor="red"
 			:loading="isTableLoading"
 		>
 			<template v-slot:top>
 				<v-switch
+					color="cyan lighten-2"
 					v-model="singleSelect"
 					label="Single select"
 					class="pa-3"
 				></v-switch>
 			</template>
 			<template slot="item.actions" slot-scope="data">
-				<v-btn x-small outlined @click="openDialogue(data.item)"
-					>View</v-btn
+				<v-btn
+					color="cyan lighten-2"
+					small
+					text
+					@click="openDialogue(data.item)"
 				>
+					View
+				</v-btn>
 			</template>
 		</v-data-table>
 
@@ -76,8 +83,14 @@ export default {
 				value: "city",
 			},
 			{
+				text: "Back in Prev year?",
+				value: "back",
+			},
+			{
 				text: "Actions",
 				value: "actions",
+				align: "center",
+				sortable: false,
 			},
 		],
 		selectedStudents: [],
@@ -113,7 +126,6 @@ export default {
 
 		openDialogue(student) {
 			this.dialog = true;
-			console.log(student);
 			this.dialogData = {
 				name: student.name,
 				rollno: student.roll_no,

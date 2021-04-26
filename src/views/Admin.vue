@@ -1,59 +1,51 @@
 <template>
-  <v-app>
-    <h1><b>Admin Panel</b></h1>
-    <v-divider />
-    <span><h2>All hostel requests</h2></span>
-    <v-divider style="margin-bottom: 20px" />
-    <v-card class="d-flex justify-center flex-wrap" depressed outlined>
-      <div>
-        <b>Pending Requests</b>
-        <RequestTable />
-      </div>
-      <div>
-        <b>Rejected Requests</b>
-        <RejectedTable />
-      </div>
-    </v-card>
-  </v-app>
+	<v-container>
+		<v-card style="padding: 20px;">
+			<div class="text-h2">
+				<b>Manual Allotment</b>
+			</div>
+		</v-card>
+		<v-divider style="margin:20px 0px 20px" />
+		<v-card class="d-flex justify-center flex-wrap">
+			<div
+				class="text-h4"
+				style="width: 100%; text-align: center; margin: 40px 0px 40px"
+			>
+				All hostel requests
+			</div>
+			<div>
+				<span class="text-h5" style="font-weight: 300;"
+					>Pending Requests</span
+				>
+				<RequestTable />
+			</div>
+			<div>
+				<span class="text-h5" style="font-weight: 300;"
+					>Rejected Requests</span
+				>
+				<RejectedTable />
+			</div>
+		</v-card>
+	</v-container>
 </template>
 
 <script>
-import store from "../store/index";
 import RequestTable from "@/components/RequestTable.vue";
 import RejectedTable from "@/components/RejectedTable.vue";
 export default {
-  components: { RequestTable, RejectedTable },
-  data() {
-    return {};
-  },
+	components: { RequestTable, RejectedTable },
+	data() {
+		return {};
+	},
 
-  beforeRouteEnter(to, from, next) {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if ((user ? user.utype !== "admin" : true) && to.name === "Admin") {
-      next("/login");
-    } else {
-      next();
-    }
-  },
-
-  // created() {
-  // 	if (!this.checkAdmin) {
-  // 		this.$router.push("/");
-  // 	}
-  // },
-  // computed: {
-  // 	checkAdmin: function() {
-  // 		return this.$store.state.user.userType === "admin" ? true : false;
-  // 	},
-  // },
-
-  // watch: {
-  // 	"$store.state.user": function() {
-  // 		if (!this.checkAdmin) {
-  // 			this.$router.push("/");
-  // 		}
-  // 	},
-  // },
+	beforeRouteEnter(to, from, next) {
+		const user = JSON.parse(localStorage.getItem("user"));
+		if ((user ? user.utype !== "admin" : true) && to.name === "Admin") {
+			next("/login");
+		} else {
+			next();
+		}
+	},
 };
 </script>
 
