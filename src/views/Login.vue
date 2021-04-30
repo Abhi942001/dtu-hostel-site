@@ -11,9 +11,12 @@ export default {
 	components: { loginCard },
 	name: "login",
 
-	mounted() {
-		if (this.$store.state.user.username) {
-			this.$router.push("/");
+	beforeRouteEnter(to, from, next) {
+		const user = JSON.parse(localStorage.getItem("user"));
+		if (user) {
+			next("/");
+		} else {
+			next();
 		}
 	},
 };
