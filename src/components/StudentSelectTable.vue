@@ -37,6 +37,14 @@
 			>Allot</v-btn
 		>
 
+		<AutoAllotDialog
+			v-if="allotDialog"
+			:dialog="allotDialog"
+			:selectedStudents="selectedStudents"
+			v-on:closeDialog="allotDialog = false"
+			v-on:showStudent="showStudent($event)"
+		/>
+
 		<v-dialog
 			v-model="dialog"
 			transition="dialog-top-transition"
@@ -63,8 +71,9 @@
 </template>
 
 <script>
+import AutoAllotDialog from "./AutoAllotDialog.vue";
 export default {
-	name: "StudentSelectTable",
+	components: { AutoAllotDialog },
 	data: () => ({
 		students: [],
 		singleSelect: false,
@@ -101,6 +110,8 @@ export default {
 			address: null,
 		},
 
+		allotDialog: false,
+
 		isButtonLoading: false,
 		isTableLoading: false,
 	}),
@@ -120,6 +131,7 @@ export default {
 		autoAllot() {
 			this.isButtonLoading = true;
 			//code
+			this.allotDialog = true;
 			this.isButtonLoading = false;
 		},
 
@@ -130,6 +142,13 @@ export default {
 				rollno: student.roll_no,
 				address: student.address1,
 			};
+		},
+
+		showStudent(id) {
+			const student = this.$store.state.admin.data.filter(
+				(el) => el.username === id
+			);
+			this.openDialogue(student[0]);
 		},
 	},
 

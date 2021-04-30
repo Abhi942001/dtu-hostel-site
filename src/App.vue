@@ -33,10 +33,35 @@ export default {
 	text-align: center;
 }
 
+html {
+	background-color: #121212;
+}
+
 .fade-enter-active {
 	transition: all 300ms;
 }
 .fade-enter {
 	opacity: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	opacity: 0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #333;
+	border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }
 </style>
