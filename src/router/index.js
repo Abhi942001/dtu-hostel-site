@@ -34,6 +34,11 @@ const routes = [
 		name: "AdminAuto",
 		component: () => import("../views/AdminAuto"),
 	},
+	{
+		path: "/admin/viewAllotment",
+		name: "AdminViewAllotment",
+		component: () => import("../views/AdminViewAllotment"),
+	}
 ];
 
 const router = new VueRouter({
