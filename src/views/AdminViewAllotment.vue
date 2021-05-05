@@ -11,7 +11,8 @@
 			class="d-flex justify-center table-container"
 			style="width: 100%"
 		>
-			<ViewAllotments :selectedStudents="selectedStudents" />
+			<ViewAllotments v-on:showStudent="showStudent($event)" />
+			<StudentDetails v-model="dialog" :student="student" />
 		</v-card>
 	</v-container>
 </template>
@@ -19,13 +20,28 @@
 <script>
 import HelloWorld from "@/components/HelloWorld";
 import ViewAllotments from "@/components/ViewAllotments";
+import StudentDetails from "@/components/StudentDetails.vue";
+
 export default {
 	props: { selectedStudents: { type: Array } },
 	components: {
 		HelloWorld,
 		ViewAllotments,
+		StudentDetails,
 	},
-	data: () => ({}),
+	data: () => ({
+		student: null,
+		dialog: false,
+	}),
+	methods: {
+		showStudent(id) {
+			this.dialog = true;
+			const student = this.$store.state.admin.data.filter(
+				(el) => el.username === id
+			);
+			this.student = student[0];
+		},
+	},
 
 	beforeRouteEnter(to, from, next) {
 		const user = JSON.parse(localStorage.getItem("user"));

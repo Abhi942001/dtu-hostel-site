@@ -21,7 +21,7 @@
 							}}</span></v-chip
 						>
 					</div>
-					<v-divider style="margin: 10px 0px 10px" />
+					<br />
 					<div class="other-details">
 						<span class="text-h5 key">Roll No:</span>
 						<span class="text-h5 val">{{ dialogData.rollno }}</span>
@@ -69,7 +69,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .other-details {
 	display: grid;
 	grid-template-columns: max-content auto;
