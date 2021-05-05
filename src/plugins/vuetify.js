@@ -10,10 +10,13 @@ export default new Vuetify({
 		dark: true,
 		themes: {
 			dark: {
-				primary: colors.cyan.lighten1,
-				secondary: colors.cyan.lighten2,
+				primary: colors.cyan.lighten3,
+				secondary: colors.cyan.darken4,
 				text: colors.cyan.lighten2,
 			},
+		},
+		options: {
+			customProperties: true,
 		},
 	},
 });

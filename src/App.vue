@@ -62,6 +62,6 @@ html {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+	background: var(--v-secondary-base);
 }
 </style>

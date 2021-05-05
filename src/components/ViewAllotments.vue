@@ -11,7 +11,7 @@
 			>
 			<template slot="item.occupant1" slot-scope="data"
 				><span
-					style="cursor: pointer"
+					class="student"
 					@click="
 						if (data.item.occupant1)
 							$emit('showStudent', data.item.occupant1.username);
@@ -25,7 +25,7 @@
 			>
 			<template slot="item.occupant2" slot-scope="data"
 				><span
-					style="cursor: pointer"
+					class="student"
 					@click="
 						if (data.item.occupant2)
 							$emit('showStudent', data.item.occupant2.username);
@@ -106,4 +106,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.student {
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+		color: var(--v-secondary-base);
+	}
+}
+</style>

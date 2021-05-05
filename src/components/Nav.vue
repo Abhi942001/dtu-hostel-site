@@ -16,7 +16,7 @@
 		<span v-else-if="isLoggedIn">
 			<v-btn color="primary" @click="logout()" text
 				>Logout
-				<span style="color: darkturquoise; margin-left: 5px">
+				<span style="color: var(--v-primary-base); margin-left: 5px">
 					{{ $store.state.user.username }}</span
 				></v-btn
 			>
@@ -96,20 +96,11 @@ export default {
 		text-decoration: none;
 		border-radius: 2px;
 		font-weight: bold;
-		color: darkturquoise;
+		color: var(--v-secondary-base);
 		padding: 3px;
 
 		transition: border cubic-bezier(0.39, 0.39, 0.32, 1.37) 300ms;
 	}
-
-	// & a.router-link-exact-active {
-	// 	// border-bottom: solid 4px;
-	// 	color: cadetblue;
-	// }
-
-	// & a:hover {
-	// 	// border-bottom: solid 4px;
-	// }
 }
 .navbarLogo {
 	height: 100%;
