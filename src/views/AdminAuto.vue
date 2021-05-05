@@ -2,7 +2,7 @@
 	<v-container style="width:100%">
 		<HelloWorld style="margin-bottom: 20px;" />
 		<v-card style="padding: 20px;">
-			<div class="text-h2">
+			<div class="text-h3">
 				<b>Auto Allotment</b>
 			</div>
 		</v-card>
