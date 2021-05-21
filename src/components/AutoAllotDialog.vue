@@ -45,8 +45,18 @@
 					></template
 				>
 			</v-data-table>
-			<v-btn @click="allotHostels()" style="margin: 0px 10px"
-				>View Auto Allot</v-btn
+			<v-btn
+				v-if="!didAllot"
+				@click="showAllotment()"
+				style="margin: 0px 10px"
+				>View Allotments</v-btn
+			>
+			<v-btn
+				v-else
+				@click="setAllotments()"
+				style="margin: 0px 10px"
+				:loading="isLoading"
+				>Allot</v-btn
 			>
 			<v-btn @click="closeDialog()">Cancel</v-btn>
 		</v-card>
@@ -91,7 +101,27 @@ export default {
 			this.didAllot = true;
 		},
 
-		setAllotments() {},
+		async setAllotments() {
+			this.isLoading = true;
+
+			for (let room of this.rooms) {
+				if (room.occupant1) {
+					await axios.post(
+						"http://localhost:8081/server/admin/hostel",
+						{
+							data: {
+								room_id: room.room_id,
+								occupant1: room.occupant1.username,
+								occupant2: room.occupant2.username,
+							},
+						}
+					);
+				}
+				this.$store.dispatch("getStudents");
+			}
+			this.isLoading = false;
+			alert("Hostels Alloted");
+		},
 
 		closeDialog() {
 			this.$emit("closeDialog");
