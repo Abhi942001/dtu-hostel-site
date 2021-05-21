@@ -12,7 +12,7 @@
 				>
 				<template slot="item.occupant1" slot-scope="data"
 					><span
-						style="cursor: pointer"
+						class="student"
 						@click="
 							if (data.item.occupant1)
 								$emit(
@@ -29,7 +29,7 @@
 				>
 				<template slot="item.occupant2" slot-scope="data"
 					><span
-						style="cursor: pointer"
+						class="student"
 						@click="
 							if (data.item.occupant2)
 								$emit(
@@ -45,18 +45,8 @@
 					></template
 				>
 			</v-data-table>
-			<v-btn
-				v-if="!didAllot"
-				@click="showAllotment()"
-				style="margin: 0px 10px"
-				>View Allotments</v-btn
-			>
-			<v-btn
-				v-else
-				@click="setAllotments"
-				style="margin: 0px 10px"
-				:loading="isLoading"
-				>Allot</v-btn
+			<v-btn @click="allotHostels()" style="margin: 0px 10px"
+				>View Auto Allot</v-btn
 			>
 			<v-btn @click="closeDialog()">Cancel</v-btn>
 		</v-card>
@@ -151,4 +141,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.student {
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+		color: var(--v-primary-base);
+	}
+}
+</style>
