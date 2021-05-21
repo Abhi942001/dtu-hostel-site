@@ -45,8 +45,18 @@
 					></template
 				>
 			</v-data-table>
-			<v-btn @click="allotHostels()" style="margin: 0px 10px"
-				>View Auto Allot</v-btn
+			<v-btn
+				v-if="!didAllot"
+				@click="showAllotment()"
+				style="margin: 0px 10px"
+				>View Allotments</v-btn
+			>
+			<v-btn
+				v-else
+				@click="setAllotments"
+				style="margin: 0px 10px"
+				:loading="isLoading"
+				>Allot</v-btn
 			>
 			<v-btn @click="closeDialog()">Cancel</v-btn>
 		</v-card>
@@ -64,13 +74,52 @@ export default {
 			{ text: "Occupant 2", value: "occupant2" },
 		],
 		rooms: [],
-
+		didAllot: false,
+		shuffledStudents: null,
 		isLoading: false,
 	}),
 	methods: {
-		allotHostels() {},
+		showAllotment() {
+			this.shuffledStudents = this.shuffleArray(this.selectedStudents);
+
+			for (let room of this.rooms) {
+				let student = this.shuffledStudents.pop();
+				if (student) {
+					if (!room.occupant1) {
+						room.occupant1 = student;
+					} else if (!room.occupant2) {
+						room.occupant2 = student;
+					}
+				}
+				if (!room.occupant2) {
+					let student2 = this.shuffledStudents.pop();
+					if (student2) {
+						room.occupant2 = student2;
+					}
+				}
+			}
+			this.didAllot = true;
+		},
+
+		setAllotments() {},
+
 		closeDialog() {
 			this.$emit("closeDialog");
+		},
+
+		shuffleArray(oldArr) {
+			let arr = [];
+			for (let i = 0; i < oldArr.length; i++) {
+				arr.push(oldArr[i]);
+			}
+			let n = arr.length;
+			for (let i = n - 1; i > 0; i--) {
+				let j = Math.floor(Math.random() * (n - 0) + 0);
+				let temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			return arr;
 		},
 	},
 	mounted() {
