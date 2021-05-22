@@ -1,74 +1,63 @@
 <template>
-  <v-app>
-    <v-card class="form" outlined>
-      <v-container class="flex-column justify-center">
-        <v-text-field
-          label="Name"
-          outlined
-          v-model="formData.name"
-          :error-messages="formData.name"
-        />
-        <v-text-field label="Roll No." outlined v-model="formData.rollno" />
-        <div class="title">Address</div>
-        <v-text-field
-          label="Address Line 1"
-          outlined
-          dense
-          v-model="formData.al1"
-        />
-        <v-text-field
-          label="Address Line 2"
-          outlined
-          dense
-          v-model="formData.al2"
-        />
-        <v-text-field label="City" outlined dense v-model="formData.city" />
-        <v-text-field label="State" outlined dense v-model="formData.state" />
-        <v-text-field
-          label="Pin Code"
-          outlined
-          v-model="formData.pincode"
-          maxlength="6"
-          counter
-          :rules="pincodeRules"
-        />
-        <v-radio-group
-          label="Back in Previous Year?"
-          v-model="hasBack"
-          row
-          dense
-        >
-          <v-radio label="Yes" value="yes" />
-          <v-radio label="No" value="no" />
-        </v-radio-group>
-        <v-select label="Year" :items="year" outlined />
-        <v-text-field
-          label="Email"
-          :rules="emailRules"
-          required="false"
-          outlined
-          dense
-          v-model="formData.email"
-        />
-        <v-text-field
-          label="Mobile"
-          :rules="phoneRules"
-          counter
-          maxlength="10"
-          outlined
-          dense
-          v-model="formData.mobile"
-        />
-        <v-btn
-          color="success"
-          outlined
-          :loading="isLoading"
-          @click="submitForm()"
-          >Submit</v-btn
-        >
-      </v-container>
-    </v-card>
-  </v-app>
+  <v-card class="form" outlined style="margin: 0px 0px 20px">
+    <v-container class="flex-column justify-center">
+      <v-text-field
+        label="Name"
+        outlined
+        v-model="formData.name"
+        :error-messages="formData.name"
+      />
+      <v-text-field label="Roll No." outlined v-model="formData.rollno" />
+      <div class="title">Address</div>
+      <v-text-field
+        label="Address Line 1"
+        outlined
+        dense
+        v-model="formData.al1"
+      />
+      <v-text-field
+        label="Address Line 2"
+        outlined
+        dense
+        v-model="formData.al2"
+      />
+      <v-text-field label="City" outlined dense v-model="formData.city" />
+      <v-text-field label="State" outlined dense v-model="formData.state" />
+      <v-text-field
+        label="Pin Code"
+        outlined
+        v-model="formData.pincode"
+        maxlength="6"
+        counter
+        :rules="pincodeRules"
+      />
+      <v-radio-group label="Back in Previous Year?" v-model="hasBack" row dense>
+        <v-radio label="Yes" value="yes" />
+        <v-radio label="No" value="no" />
+      </v-radio-group>
+      <v-select label="Year" :items="year" outlined />
+      <v-text-field
+        label="Email"
+        :rules="emailRules"
+        required="false"
+        outlined
+        dense
+        v-model="formData.email"
+      />
+      <v-text-field
+        label="Mobile"
+        :rules="phoneRules"
+        counter
+        maxlength="10"
+        outlined
+        dense
+        v-model="formData.mobile"
+      />
+      <v-btn color="primary" text :loading="isLoading" @click="submitForm()"
+        >Submit</v-btn
+      >
+    </v-container>
+  </v-card>
 </template>
 
 <script>

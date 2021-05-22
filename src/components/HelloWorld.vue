@@ -1,12 +1,38 @@
 <template>
   <!-- if user is student -->
   <div v-if="userType === 'student'">
-    <div v-if="!$store.state.user.hasRequestedAllotment">
+    <div v-if="!hostelStatus">
       To request hostel allotment click
-      <router-link to="student" exact>here!</router-link>
+      <router-link to="student" exact
+        ><v-btn text outlined small>here!</v-btn></router-link
+      >
     </div>
-    <div v-else-if="$store.state.user.hasRequestedAllotment">
+    <div
+      v-else-if="
+        hostelStatus &&
+        hostelStatus.is_alloted === 0 &&
+        hostelStatus.req_rejected === 0
+      "
+    >
       Hostel request pending.
+    </div>
+    <div
+      v-else-if="
+        hostelStatus &&
+        hostelStatus.is_alloted === 0 &&
+        hostelStatus.req_rejected === 1
+      "
+    >
+      Hostel request rejected!
+    </div>
+    <div
+      v-else-if="
+        hostelStatus &&
+        hostelStatus.is_alloted === 1 &&
+        hostelStatus.req_rejected === 0
+      "
+    >
+      Congratulations, hostel alloted! Please report at Hostel Office Promptly.
     </div>
   </div>
 
