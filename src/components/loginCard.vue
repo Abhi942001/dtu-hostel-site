@@ -23,8 +23,7 @@
 						v-model="password"
 					/>
 					<v-btn
-						color="success"
-						depressed
+						color="primary"
 						outlined
 						:loading="isLoading"
 						@click="submitActions()"
